@@ -36,15 +36,23 @@ public class Properties {
 		
 		if (packages != null) {
 			scanProperties.setPackages(packages.split(","));
+		}else {
+			scanProperties.setPackages(new String[]{});
 		}
 		if (excepts != null) {
 			scanProperties.setExceptPackages(excepts.split(","));
+		}else {
+			scanProperties.setExceptPackages(new String[]{});
 		}
 		if(recursion != null){
 			scanProperties.setRecursion("true".equals(recursion));
+		}else {
+			scanProperties.setRecursion(true);
 		}
 		if(lazy != null){
 			loadAllLazy = "true".equals(lazy);
+		}else {
+			loadAllLazy = false;
 		}
 		
 		if(logger.isDebugEnabled()){

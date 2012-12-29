@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.upupxjg.ereq.util.Properties;
+
 public class CoreFilter implements Filter {
 
 	@Override
@@ -26,7 +28,9 @@ public class CoreFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
+		
+		//‘ÿ»Î≈‰÷√
+		Properties.init();
 
 	}
 
