@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  */
 
 @Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = { ElementType.METHOD})
+@Target(value = { ElementType.TYPE})
 public @interface AsPath {
 	String path();
 }

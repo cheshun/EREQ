@@ -50,13 +50,11 @@ public class Scanner {
 		while (iterator.hasNext()) {
 			classes.addAll(packageScan(iterator.next()));
 		}
-		logger.debug("fill up scanned,classes OK");
-		logger.info("##  ======  ## Scanner INIT FINISHED ##  ======  ##");
+		logger.debug("fill up scanned,classes OK load");
+		logger.info("##  ======  ## Scanner INIT FINISHED "+classes.size()+" classed loaded   ##  ======  ##");
 	}
 
-	public Regeister[] getRegeisters() {
-		return regeisters;
-	}
+
 
 	public void setRegeisters(Regeister[] regeisters) {
 		this.regeisters = regeisters;
@@ -66,6 +64,9 @@ public class Scanner {
 		if (regeisters.length != checkRegeisterStauts(regeisters)) {
 			logger.error("Scanner.scan::regeisters not all ready!");
 			throw new EREQException();
+		}
+		for (Regeister regeister : regeisters) {
+			regeister.regist(classes);
 		}
 
 	}
@@ -169,13 +170,13 @@ public class Scanner {
 		scanned.add(packageName);
 		logger.info("SCAN PATH:" + packagePath);
 		if (unPackageSet.contains(packageName)) {
-			logger.info("忽略包：" + packageName);
+			logger.info("Skip not wanted package:" + packageName);
 			return;
 		}
 
 		File dir = new File(packagePath);
 		if (!dir.exists() || !dir.isDirectory()) {
-			logger.warn("包： " + packageName + " 下没有任何文件");
+			logger.warn("there is no file in package:" + packageName );
 			return;
 		}
 
@@ -205,7 +206,6 @@ public class Scanner {
 	private Set<String> removeConflict(Set<String> packageSet, Set<String> unPackageSet) {
 		Set<String> OKSet = new LinkedHashSet<String>();
 
-		// 基本去重
 		Iterator<String> iterator = unPackageSet.iterator();
 		while (iterator.hasNext()) {
 			String unPackage = iterator.next();

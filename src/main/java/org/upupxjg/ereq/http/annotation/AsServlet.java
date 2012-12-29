@@ -16,8 +16,10 @@ import javax.management.remote.TargetedNotification;
  * 用于表示某类为servlet类，其中的public方法需{@link @AsPath}支持
  * 2012-12-26 下午9:25:33
  */
+@Deprecated
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.TYPE})
 public @interface AsServlet {
 	boolean lazy() default false;
+	String service();
 }
