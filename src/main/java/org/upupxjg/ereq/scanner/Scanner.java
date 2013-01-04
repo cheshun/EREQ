@@ -60,10 +60,18 @@ public class Scanner {
 		this.regeisters = regeisters;
 	}
 
+	/**
+	 * before call this method ,you must call init() first!
+	 * @param regeisters
+	 * @throws EREQException
+	 */
 	public void scan(Regeister[] regeisters) throws EREQException {
 		if (regeisters.length != checkRegeisterStauts(regeisters)) {
 			logger.error("Scanner.scan::regeisters not all ready!");
 			throw new EREQException();
+		}else if(classes == null || classes.size() == 0){
+			logger.warn("There is no class to regist");
+			return;
 		}
 		for (Regeister regeister : regeisters) {
 			regeister.regist(classes);
@@ -76,7 +84,7 @@ public class Scanner {
 	}
 
 	/**
-	 * get OK regeisters number
+	 * get OK registers number
 	 * 
 	 * @param regeisters
 	 * @return
@@ -203,6 +211,7 @@ public class Scanner {
 		}
 	}
 
+	@Deprecated
 	private Set<String> removeConflict(Set<String> packageSet, Set<String> unPackageSet) {
 		Set<String> OKSet = new LinkedHashSet<String>();
 
@@ -217,9 +226,4 @@ public class Scanner {
 		return OKSet;
 	}
 
-	public static void main(String args[]) {
-		Set<String> set = new HashSet<String>();
-		set.add(new String("aaa"));
-		System.out.println(set.contains(new String("aaa")));
-	}
 }

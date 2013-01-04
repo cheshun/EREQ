@@ -10,5 +10,4 @@ public class EREQHttpRequest extends HttpServletRequestWrapper{
 		super(request);
 	}
 
-	
 }

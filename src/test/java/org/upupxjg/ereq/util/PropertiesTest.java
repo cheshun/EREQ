@@ -9,8 +9,8 @@ public class PropertiesTest {
 	@Test
 	public void test() {
 		Properties.init();
-		assertEquals(false, Properties.scan().recursion());
-		assertEquals(true, Properties.loadLazy());
+		assertEquals(true, Properties.scan().recursion());
+		assertEquals(false, Properties.loadLazy());
 		assertNotNull(Properties.scan().packages());
 		assertNotNull(Properties.scan().except());
 	}

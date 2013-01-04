@@ -16,10 +16,12 @@ public class FilterRegeister implements Regeister {
 
 	@Override
 	public void regist(Set<Class<?>> classes) {
+		logger.debug("================filter register ===================");
 		for (Class<?> clazz : classes) {
 			String path = null;
 			// extends from filter
-			if (clazz.isAssignableFrom(Filter.class)) {
+			logger.debug("scann class:"+clazz.getName());
+			if (Filter.class.isAssignableFrom(clazz)) {
 				
 				asEnable aEnable = clazz.getAnnotation(asEnable.class);
 				if (aEnable != null && !aEnable.enable()) {
@@ -31,7 +33,7 @@ public class FilterRegeister implements Regeister {
 					path = apath.path();
 					try {
 						FilterPool.regeist(new EREQFilter(path, (Filter) clazz.newInstance()));
-						logger.info("Mapping Filter'path'->'" + clazz.getName() + "'");
+						logger.info("Mapping Filter'"+path+"'->'" + clazz.getName() + "'");
 					} catch (InstantiationException e) {
 						logger.error(clazz.getName() + "can not be instanted!");
 					} catch (IllegalAccessException e) {
